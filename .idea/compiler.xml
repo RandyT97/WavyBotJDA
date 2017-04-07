@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="JDA" />
+        <module name="WavyBotJDA" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="JDA" target="1.5" />
+      <module name="WavyBotJDA" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

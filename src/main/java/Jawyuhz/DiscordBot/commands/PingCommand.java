@@ -8,20 +8,25 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
  */
 public class PingCommand implements Command {
 
-    private final String HELP = "USAGE: " + Constants.PREFIX + "ping";
+    private final String HELP = "Usage: " + Constants.PREFIX + "ping";
 
     public Boolean called(String[] args, MessageReceivedEvent event) {
         return true;
     }
 
     public void action(String[] args, MessageReceivedEvent event) {
-        event.getTextChannel().sendMessage("Pong").queue();
+        if(args==null || args.length==0)
+            event.getTextChannel().sendMessage("Pong").queue();
+        else
+            if(args[0]!=null && args[0].equalsIgnoreCase("help"))
+                help(event);
+
 
 
     }
 
-    public String help() {
-        return HELP;
+    public void help(MessageReceivedEvent event) {
+       event.getTextChannel().sendMessage(HELP).queue();
     }
 
     public void executed(boolean success, MessageReceivedEvent event) {

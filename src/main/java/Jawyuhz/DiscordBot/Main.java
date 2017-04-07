@@ -27,6 +27,7 @@ public class Main {
             e.printStackTrace();
         }
         commands.put("ping", new PingCommand());
+        commands.put("nba", new PingCommand());
     }
     public static void handleCommand(CommandParser.CommandContainer cmd) {
         if(commands.containsKey(cmd.invoke)) {

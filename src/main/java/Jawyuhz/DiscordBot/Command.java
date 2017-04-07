@@ -10,7 +10,7 @@ public interface Command {
 
     public Boolean called(String[] args, MessageReceivedEvent event);
     public void action(String[] args, MessageReceivedEvent event);
-    public String help();
+    public void help(MessageReceivedEvent event);
     public void executed(boolean success, MessageReceivedEvent event);
 
 }
