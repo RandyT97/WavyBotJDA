@@ -11,7 +11,7 @@ public class CommandParser {
     public CommandContainer parse(String rw, MessageReceivedEvent e) {
         ArrayList<String> split = new ArrayList<String>();
         String raw = rw;
-        String beheaded = raw.replaceFirst("~!","");
+        String beheaded = raw.replaceFirst(Sneaky.PREFIX,"");
         String[] splitBeheaded = beheaded.split(" ");
         for(String s : splitBeheaded) {split.add(s);}
         String invoke = split.get(0);

@@ -5,5 +5,5 @@ package Tsui.Randy.DiscordBot.utils;
  */
 public class Sneaky {
     public static final String DISCORD_TOKEN = "Mjk3MTg3MjM0NDU5ODExODUx.C8isbQ.Aq3-g83Zp4cSMGZDxJfJQm9El1o";
-
+    public static final String PREFIX = "~!";
 }
