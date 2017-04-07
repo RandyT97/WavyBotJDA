@@ -16,7 +16,6 @@ public class PingCommand implements Command {
     }
 
     public void action(String[] args, MessageReceivedEvent event) {
-        // TODO Remove Statement After Testing
         event.getTextChannel().sendMessage("Pong").queue();
 
 
