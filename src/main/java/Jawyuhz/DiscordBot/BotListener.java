@@ -1,6 +1,6 @@
-package Tsui.Randy.DiscordBot;
+package Jawyuhz.DiscordBot;
 
-import Tsui.Randy.DiscordBot.utils.Sneaky;
+import Jawyuhz.DiscordBot.utils.Constants;
 import net.dv8tion.jda.core.events.ReadyEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -11,7 +11,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class BotListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        if(event.getMessage().getContent().startsWith(Sneaky.PREFIX) && event.getMessage().getAuthor().getId() != event.getJDA().getSelfUser().getId()) Main.handleCommand(Main.parser.parse(event.getMessage().getContent().toLowerCase(), event));
+        if(event.getMessage().getContent().startsWith(Constants.PREFIX) && event.getMessage().getAuthor().getId() != event.getJDA().getSelfUser().getId()) Main.handleCommand(Main.parser.parse(event.getMessage().getContent().toLowerCase(), event));
     }
     @Override
     public void onReady(ReadyEvent event) {

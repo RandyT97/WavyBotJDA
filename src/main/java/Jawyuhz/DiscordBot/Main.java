@@ -1,11 +1,11 @@
-package Tsui.Randy.DiscordBot;
+package Jawyuhz.DiscordBot;
 
 /**
  * Created by Randy on 4/7/2017.
  */
-import Tsui.Randy.DiscordBot.commands.PingCommand;
-import Tsui.Randy.DiscordBot.utils.CommandParser;
-import Tsui.Randy.DiscordBot.utils.Sneaky;
+import Jawyuhz.DiscordBot.commands.PingCommand;
+import Jawyuhz.DiscordBot.utils.CommandParser;
+import Jawyuhz.DiscordBot.utils.Constants;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -20,7 +20,7 @@ public class Main {
     public static HashMap<String, Command> commands = new HashMap<String, Command>();
     public static void main(String[] args) {
         try{
-            jda = new JDABuilder(AccountType.BOT).addListener(new BotListener()).setToken(Sneaky.DISCORD_TOKEN).buildBlocking();
+            jda = new JDABuilder(AccountType.BOT).addListener(new BotListener()).setToken(Constants.DISCORD_TOKEN).buildBlocking();
             jda.setAutoReconnect(true);
         }
         catch(Exception e){ //Check doc for more

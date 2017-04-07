@@ -1,4 +1,4 @@
-package Tsui.Randy.DiscordBot;
+package Jawyuhz.DiscordBot;
 
 import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;

@@ -1,15 +1,14 @@
-package Tsui.Randy.DiscordBot.commands;
+package Jawyuhz.DiscordBot.commands;
 
-import Tsui.Randy.DiscordBot.Command;
-import Tsui.Randy.DiscordBot.utils.Sneaky;
-import net.dv8tion.jda.core.entities.MessageChannel;
+import Jawyuhz.DiscordBot.Command;
+import Jawyuhz.DiscordBot.utils.Constants;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 /**
  * Created by Randy on 4/7/2017.
  */
 public class PingCommand implements Command {
 
-    private final String HELP = "USAGE: " + Sneaky.PREFIX + "ping";
+    private final String HELP = "USAGE: " + Constants.PREFIX + "ping";
 
     public Boolean called(String[] args, MessageReceivedEvent event) {
         return true;
