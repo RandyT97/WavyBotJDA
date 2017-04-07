@@ -3,6 +3,7 @@ package Jawyuhz.DiscordBot;
 /**
  * Created by Randy on 4/7/2017.
  */
+import Jawyuhz.DiscordBot.commands.NBACommand;
 import Jawyuhz.DiscordBot.commands.PingCommand;
 import Jawyuhz.DiscordBot.utils.CommandParser;
 import Jawyuhz.DiscordBot.utils.Constants;
@@ -27,7 +28,7 @@ public class Main {
             e.printStackTrace();
         }
         commands.put("ping", new PingCommand());
-        commands.put("nba", new PingCommand());
+        commands.put("nba", new NBACommand());
     }
     public static void handleCommand(CommandParser.CommandContainer cmd) {
         if(commands.containsKey(cmd.invoke)) {
