@@ -13,6 +13,9 @@ import net.dean.jraw.paginators.SubredditPaginator;
 import net.dean.jraw.paginators.CommentStream;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static net.dean.jraw.paginators.Sorting.TOP;
 
@@ -37,46 +40,78 @@ public class NBACommand implements Command{
                     Constants.PREFIX +
                     "TEAMSHORTHAND").queue();
         }
-        else {
-            try {
+        else try {
 
-                        OAuthData authData = redditClient.getOAuthHelper().easyAuth(credentials);
-                        redditClient.authenticate(authData);
-                        redditClient.me();
-                        System.out.println("OAuth Successful Login");
-                        SubredditPaginator link = new SubredditPaginator(redditClient , "wavesdontdie");
-                        CommentStream commentPaginator = new CommentStream(redditClient,"wavesdontdie");
-                        Listing<Submission> test = link.next();
-                        System.out.println(test.size());
-                        for(Listing s : commentPaginator) {
-                            System.out.println(s.setSorting(TOP));
-                        }
-//                        for(Submission sub : test) {
-//                            if(sub.getTitle().toLowerCase().contains(args[0])) {//Conditional Successful to find if team matches thread title
-//                                System.out.println(commentPaginator.)
-//                                event.getTextChannel().sendMessage(sub.getTitle());
-//                                CommentNode comments = sub.getComments();
-//                                event.getTextChannel().sendMessage(comments.getComment().getBody()).queue();
-//
-//                            }
-//                            try {
-//                                Thread.sleep(1000);
-//                            }
-//                            catch(Exception e) {
-//
-//                            }
-//                        }
-
+            OAuthData authData = redditClient.getOAuthHelper().easyAuth(credentials);
+            redditClient.authenticate(authData);
+            redditClient.me();
+            System.out.println("OAuth Successful Login");
+            System.out.printf("\n%s", args[0]);
+            printComments(args[0], redditClient, "nbastreams", event);
+//                        SubredditPaginator link = new SubredditPaginator(redditClient , "wavesdontdie");
+//                        CommentStream commentPaginator = new CommentStream(redditClient,"wavesdontdie");
+//                        Listing<Submission> test = link.next();
+//                        System.out.println(test.size());
+//                        List<Comment> allComments
+////                        for(Submission sub : test) {
+////                            if(sub.getTitle().toLowerCase().contains(args[0])) {//Conditional Successful to find if team matches thread title
+//////                                System.out.println(commentPaginator.)
+////                                event.getTextChannel().sendMessage(sub.getTitle());
+////                                CommentNode comments = sub.getComments();
+////                                event.getTextChannel().sendMessage(comments.getComment().getBody()).queue();
+////
+////                            }
+////                            try {
+////                                Thread.sleep(1000);
+////                            }
+////                            catch(Exception e) {
+////
+////                            }
+////                        }
 
 
-
-
-                    } catch (OAuthException e) {
-                        e.printStackTrace();
-                    }
+        } catch (OAuthException e) {
+            e.printStackTrace();
         }
 
 
+    }
+    public static void printComments(String arg, RedditClient redditClient, String subreddit,MessageReceivedEvent event) {
+        List<Comment> allComments = new ArrayList<Comment>();
+        SubredditPaginator sub = new SubredditPaginator(redditClient, subreddit);
+        for(Submission submission: sub.next()) {
+            System.out.println(submission.getTitle());
+            if((submission.getTitle().toLowerCase().contains(arg))&&(submission.getCommentCount()!=0)) {
+                System.out.println("TEST");
+                allComments = getAllComments(redditClient, submission);
+            }
+        }
+        if(allComments.size()!=0) {
+            System.out.println("ATTEMPTING TO PRINT");
+            for (Comment comment : allComments) {
+                event.getTextChannel().sendMessage(comment.getBody()).queue();
+            }
+        }
+    }
+    public static List<Comment> getAllComments(RedditClient client, Submission submission) {
+        List<Comment> comments = new ArrayList<Comment>();
+        if(submission.getComments()!=null ) {
+            System.out.println("Submission get comment not null");
+            for (CommentNode node : submission.getComments()) {
+                comments.addAll(getComments(client, node));
+            }
+            return comments;
+        }
+        return comments;
+    }
+
+    public static List<Comment> getComments(RedditClient client, CommentNode node) {
+        List<Comment> comments = new ArrayList<Comment>();
+        if(node != null) {
+            System.out.println("NOT NULL TEST");
+            comments.add(node.getComment());
+        }
+        return comments;
     }
     public void help(MessageReceivedEvent event) {
 
