@@ -24,21 +24,22 @@ import static net.dean.jraw.paginators.Sorting.TOP;
  */
 public class NBACommand implements Command{
     private final String HELP = "Usage: " + Constants.PREFIX;
+    private UserAgent myUserAgent;
+    private RedditClient redditClient;
+    private Credentials credentials;
 
     public Boolean called(String[] args, MessageReceivedEvent event) {return true;}
 
     public void action(String[] args, MessageReceivedEvent event) {
 
-        UserAgent myUserAgent = UserAgent.of("desktop","jawyuhz.DiscordBot", "v0.1", "atomsapple1");
-        RedditClient redditClient = new RedditClient(myUserAgent);
+        myUserAgent = UserAgent.of("desktop","jawyuhz.DiscordBot", "v0.1", "atomsapple1");
+        redditClient = new RedditClient(myUserAgent);
+        credentials = Credentials.script(Constants.REDDIT_USER,Constants.REDDIT_PASSWORD,Constants.REDDIT_CLIENT_ID,Constants.REDDIT_SECRET);
 
-        Credentials credentials = Credentials.script(Constants.REDDIT_USER,Constants.REDDIT_PASSWORD
-        ,Constants.REDDIT_CLIENT_ID,Constants.REDDIT_SECRET);
 
         if(args==null || args.length==0) {
             event.getTextChannel().sendMessage("Please enter "+
-                    Constants.PREFIX +
-                    "TEAMSHORTHAND").queue();
+                    Constants.PREFIX + "city").queue();
         }
         else try {
 
@@ -47,7 +48,22 @@ public class NBACommand implements Command{
             redditClient.me();
             System.out.println("OAuth Successful Login");
             System.out.printf("\n%s", args[0]);
-            printComments(args[0], redditClient, "nbastreams", event);
+            SubredditPaginator subreddit = new SubredditPaginator(redditClient, "nbastreams");
+            for(Submission s: subreddit.next()) {
+
+                if(s.getTitle().toLowerCase().contains(args[0])) {
+                    System.out.println("FOUND");
+                    Submission fullSubmissionInfo = redditClient.getSubmission(s.getId());
+                    System.out.println(s.getTitle());
+                    CommentNode node = fullSubmissionInfo.getComments();
+                    Comment comment = node.getComment();
+                    System.out.println(fullSubmissionInfo.getCommentCount());
+                    if(redditClient.getSubmission(s.getId()).getComments().getComment()!=null) {
+                        System.out.println(fullSubmissionInfo.getComments().getComment().getBody());;
+                    }
+                }
+            }
+//            printComments(args[0], redditClient, "nbastreams", event);
 //                        SubredditPaginator link = new SubredditPaginator(redditClient , "wavesdontdie");
 //                        CommentStream commentPaginator = new CommentStream(redditClient,"wavesdontdie");
 //                        Listing<Submission> test = link.next();
