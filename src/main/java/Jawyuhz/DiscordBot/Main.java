@@ -5,6 +5,7 @@ package Jawyuhz.DiscordBot;
  */
 import Jawyuhz.DiscordBot.commands.NBACommand;
 import Jawyuhz.DiscordBot.commands.PingCommand;
+import Jawyuhz.DiscordBot.commands.Weather;
 import Jawyuhz.DiscordBot.utils.CommandParser;
 import Jawyuhz.DiscordBot.utils.Constants;
 import net.dv8tion.jda.core.AccountType;
@@ -29,6 +30,7 @@ public class Main {
         }
         commands.put("ping", new PingCommand());
         commands.put("nba", new NBACommand());
+        commands.put("weather", new Weather());
     }
     public static void handleCommand(CommandParser.CommandContainer cmd) {
         if(commands.containsKey(cmd.invoke)) {
@@ -37,6 +39,7 @@ public class Main {
             if(safe) {
                 commands.get(cmd.invoke).action(cmd.args, cmd.event);
                 commands.get(cmd.invoke).executed(safe, cmd.event);
+
                 //LOG?
             }
             else {
