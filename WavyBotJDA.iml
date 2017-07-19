@@ -34,5 +34,7 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.google.guava:guava:19.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:slf4j-api:1.7.13" level="project" />
+    <orderEntry type="library" name="Maven: com.github.dvdme:ForecastIOLib:1.6.0" level="project" />
+    <orderEntry type="library" name="Maven: com.eclipsesource.minimal-json:minimal-json:0.9.4" level="project" />
   </component>
 </module>
